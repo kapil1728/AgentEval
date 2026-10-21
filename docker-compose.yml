@@ -1,0 +1,30 @@
+services:
+  api:
+    image: agenteval:local
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment:
+      AGENTEVAL_DATABASE_URL: sqlite:////data/agenteval.db
+      AGENTEVAL_TASKS_ROOT: /app/tasks
+    volumes:
+      - agenteval-data:/data
+      - ./tasks:/app/tasks:ro
+      - ./configs:/app/configs:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "127.0.0.1:8000:8000"
+    restart: unless-stopped
+
+  dashboard:
+    build:
+      context: dashboard
+      dockerfile: Dockerfile
+    depends_on:
+      - api
+    ports:
+      - "127.0.0.1:5173:80"
+    restart: unless-stopped
+
+volumes:
+  agenteval-data:

@@ -1,0 +1,9 @@
+{
+  "task_id": "sample-refactor",
+  "title": "Implement the total calculation",
+  "workspace": "sample-refactor/workspace",
+  "docker_image": "python:3.12-slim",
+  "agent_command": "python -c \"from pathlib import Path; p = Path('calculator.py'); p.write_text(p.read_text().replace('return 0', 'return sum(values)'))\"",
+  "test_command": "python -m unittest -q",
+  "timeout_seconds": 120
+}

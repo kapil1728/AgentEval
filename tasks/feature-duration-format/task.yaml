@@ -1,0 +1,8 @@
+id: feature-duration-format
+description: Format nonnegative durations as compact minutes and seconds.
+category: feature
+repo_snapshot_path: feature-duration-format/repo_snapshot
+setup_commands: []
+test_command: python -m pytest -q
+timeout: 120
+difficulty: easy

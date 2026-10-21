@@ -1,0 +1,9 @@
+adapter: mock
+agent_version: ci-mock-baseline
+model_version: ci-mock-model
+prompt_hash: ci-mock-prompt
+git_sha: "0000000000000000000000000000000000000001"
+mock_behavior: succeeds
+image: agenteval:ci
+input_usd_per_million: 1.0
+output_usd_per_million: 2.0

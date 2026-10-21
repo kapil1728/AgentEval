@@ -1,0 +1,8 @@
+id: refactor-stable-unique
+description: Refactor duplicate removal to preserve the first-seen item order.
+category: refactor
+repo_snapshot_path: refactor-stable-unique/repo_snapshot
+setup_commands: []
+test_command: python -m pytest -q
+timeout: 120
+difficulty: medium

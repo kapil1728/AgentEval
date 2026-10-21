@@ -1,0 +1,9 @@
+adapter: mock
+agent_version: mock-success-v1
+model_version: mock-model-v1
+prompt_hash: mock-prompt-v1
+git_sha: "0000000000000000000000000000000000000001"
+mock_behavior: succeeds
+image: agenteval:local
+input_usd_per_million: 1.0
+output_usd_per_million: 2.0

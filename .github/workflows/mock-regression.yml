@@ -1,0 +1,39 @@
+name: Mock regression gate
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  mock-regression:
+    runs-on: ubuntu-latest
+    env:
+      AGENTEVAL_DATABASE_URL: sqlite:///./mock-ci.db
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build local sandbox image
+        run: docker build -f backend/Dockerfile -t agenteval:ci .
+      - name: Install AgentEval
+        run: python -m pip install -e "backend[dev]"
+      - name: Run mock baseline tasks
+        run: agenteval run --agent configs/ci-mock-baseline.yaml --tasks tasks --task-id ci-mock-smoke --repeats 10 --concurrency 1
+      - name: Run stable mock candidate
+        run: agenteval run --agent configs/ci-mock-stable.yaml --tasks tasks --task-id ci-mock-smoke --repeats 10 --concurrency 1
+      - name: Compare stable candidate
+        run: agenteval compare ci-mock-baseline ci-mock-stable
+      - name: Run deliberately regressed mock candidate
+        run: agenteval run --agent configs/ci-mock-regression.yaml --tasks tasks --task-id ci-mock-smoke --repeats 10 --concurrency 1
+      - name: Verify regression fails the CI gate
+        shell: bash
+        run: |
+          set +e
+          agenteval compare ci-mock-baseline ci-mock-regression
+          status=$?
+          set -e
+          if [ "$status" -ne 1 ]; then
+            echo "Expected a significant regression to exit 1, got $status"
+            exit 1
+          fi

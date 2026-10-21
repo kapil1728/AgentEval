@@ -1,0 +1,8 @@
+id: feature-slugify
+description: Normalize text into a lowercase hyphen-separated URL slug.
+category: feature
+repo_snapshot_path: feature-slugify/repo_snapshot
+setup_commands: []
+test_command: python -m pytest -q
+timeout: 120
+difficulty: medium

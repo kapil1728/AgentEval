@@ -1,0 +1,8 @@
+id: bugfix-clamp
+description: Clamp values below the lower bound as well as above the upper bound.
+category: bugfix
+repo_snapshot_path: bugfix-clamp/repo_snapshot
+setup_commands: []
+test_command: python -m pytest -q
+timeout: 120
+difficulty: easy

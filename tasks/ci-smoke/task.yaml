@@ -1,0 +1,8 @@
+id: ci-mock-smoke
+description: Deterministic CI smoke task scored by mock adapters.
+category: bugfix
+repo_snapshot_path: ci-smoke/repo_snapshot
+setup_commands: []
+test_command: python -m pytest -q
+timeout: 60
+difficulty: easy

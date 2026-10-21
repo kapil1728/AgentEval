@@ -1,0 +1,8 @@
+id: bugfix-safe-divide
+description: Return None instead of raising when the denominator is zero.
+category: bugfix
+repo_snapshot_path: bugfix-safe-divide/repo_snapshot
+setup_commands: []
+test_command: python -m pytest -q
+timeout: 120
+difficulty: easy
